@@ -39,8 +39,9 @@ namespace E_CommerceG01
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                
             }
-
+            app.UseStaticFiles();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
