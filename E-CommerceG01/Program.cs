@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Presistance.Data;
 using Presistance.Data.DataSeed;
 using Presistance.Repositories;
+using Services.Abstraction;
+using Servieces;
 
 namespace E_CommerceG01
 {
@@ -21,6 +23,7 @@ namespace E_CommerceG01
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(Servieces.AssemblyReference).Assembly);
+            builder.Services.AddScoped<IServiceManger, ServiceManger>();
             builder.Services.AddDbContext<AppDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
