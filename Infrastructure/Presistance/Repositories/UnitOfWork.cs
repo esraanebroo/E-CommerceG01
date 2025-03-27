@@ -1,5 +1,4 @@
-﻿
-namespace Presistance.Repositories
+﻿namespace Presistance.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -12,10 +11,9 @@ namespace Presistance.Repositories
             _dbContext = dbContext;
             _repositories = new();
         }
-        public IGenaricRepository<TEntity, Tkey> GenaricRepository<TEntity, Tkey>() where TEntity : BaseEntity<Tkey>
-            => (IGenaricRepository<TEntity, Tkey>)_repositories.GetOrAdd(typeof(TEntity).Name, (_) => new GenericRepository<TEntity, Tkey>(_dbContext));
 
-       
+        public IGenaricRepository<TEntity, Tkey> GetRepository<TEntity, Tkey>() where TEntity : BaseEntity<Tkey>
+            => (IGenaricRepository<TEntity, Tkey>)_repositories.GetOrAdd(typeof(TEntity).Name, (_) => new GenericRepository<TEntity, Tkey>(_dbContext));
 
         public async Task<int> SaveChangesAsync()=>await _dbContext.SaveChangesAsync();
         
