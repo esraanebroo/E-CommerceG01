@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared
+namespace Servieces
 {
-    public record BrandResultDto
+    public class AssemblyReference
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
     }
 }

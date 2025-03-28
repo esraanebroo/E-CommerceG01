@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared
+namespace Services.Abstraction
 {
-    public record BrandResultDto
+    public interface IServiceManger
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public IProductService ProductService { get; }
     }
 }
