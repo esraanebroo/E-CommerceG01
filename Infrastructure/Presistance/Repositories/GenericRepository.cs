@@ -22,15 +22,13 @@
 
         public void Delete(TEntity entity) => _dbContext.Set<TEntity>().Remove(entity);
 
-       
-       
+        public async Task<TEntity?> GetByIdAsync(Specifications<TEntity> specifications)
+          =>await ApplySpecifications(specifications).FirstOrDefaultAsync();
 
+        public async Task<IEnumerable<TEntity?>> GetAllAsync(Specifications<TEntity> specifications)
+        =>await ApplySpecifications(specifications).ToListAsync();
+    private IQueryable<TEntity> ApplySpecifications(Specifications<TEntity> specifications)
+            =>  SpecificationEvalutor.GetQuery<TEntity>(_dbContext.Set<TEntity>(), specifications);
 
-       
-        
-            
-        
-
-        
     }
 }
