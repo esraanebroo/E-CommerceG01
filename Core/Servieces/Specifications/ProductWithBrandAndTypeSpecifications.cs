@@ -1,10 +1,5 @@
 ﻿using Domain.Contracts;
 using Domain.Entites;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Servieces.Specifications
 {
@@ -16,10 +11,32 @@ namespace Servieces.Specifications
             AddInclude(product => product.ProductType);
         }
         //use to retrive all products [includ[brands, types]]
-        public ProductWithBrandAndTypeSpecifications() : base(null)
+        public ProductWithBrandAndTypeSpecifications(string? sort,int ?brandId,int?typeId) 
+            : base(product=>
+            (!brandId.HasValue|| product.BrandId==brandId.Value)&&
+            (!typeId.HasValue||product.TypeId==typeId.Value)
+            )
         {
             AddInclude(product=>product.productBrand);
             AddInclude(product=>product.ProductType);
+            if (!string.IsNullOrWhiteSpace(sort))
+            {
+                switch (sort.ToLower().Trim())
+                {
+                    case "pricedes":
+                        SetOrderByDescending(p => p.Price);
+                        break;
+                    case "Priceasc":
+                        SetOrderBy(p => p.Price);
+                        break;
+                    case "namedec":
+                        SetOrderByDescending(p => p.Name);
+                        break;
+                    default:
+                        SetOrderBy(p => p.Name);
+                        break;
+                }
+            }
         }
         
     }
