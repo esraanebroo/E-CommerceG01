@@ -20,6 +20,7 @@ namespace Servieces.Specifications
         {
             AddInclude(product=>product.productBrand);
             AddInclude(product=>product.ProductType);
+            ApplyPagination(specifications.PageIndex, specifications.PageSize);
             if (specifications.Sort is not null)
             {
                 switch (specifications.Sort)
