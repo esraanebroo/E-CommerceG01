@@ -27,8 +27,10 @@
 
         public async Task<IEnumerable<TEntity?>> GetAllAsync(Specifications<TEntity> specifications)
         =>await ApplySpecifications(specifications).ToListAsync();
-    private IQueryable<TEntity> ApplySpecifications(Specifications<TEntity> specifications)
+        private IQueryable<TEntity> ApplySpecifications(Specifications<TEntity> specifications)
             =>  SpecificationEvalutor.GetQuery<TEntity>(_dbContext.Set<TEntity>(), specifications);
 
+        public async Task<int> CountAsync(Specifications<TEntity> spesfications)
+        => await ApplySpecifications(spesfications).CountAsync(); 
     }
 }

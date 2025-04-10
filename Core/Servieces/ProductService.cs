@@ -22,11 +22,19 @@ namespace Servieces
             return Result;
         }
 
-        public async Task<IEnumerable<ProductResultDto>> GetAllProductAsync(ProductParametersSpecifications specifications)
+        public async Task<PaginatedResult<ProductResultDto>> GetAllProductAsync(ProductParametersSpecifications specifications)
         {
             var Product = await UnitOfWork.GetRepository<Product, int>().GetAllAsync(new ProductWithBrandAndTypeSpecifications(specifications));
-            var Result = Mapper.Map<IEnumerable<ProductResultDto>>(Product);
-            return Result;
+            var totalcount = await UnitOfWork.GetRepository<Product, int>().CountAsync(new ProductCountSpecification(specifications)); 
+            var ProductsResult = Mapper.Map<IEnumerable<ProductResultDto>>(Product);
+            //return Result;
+            var result = new PaginatedResult<ProductResultDto>(
+                ProductsResult.Count(),
+                specifications.PageIndex,
+                totalcount,
+                ProductsResult
+                );
+            return result;
         }
 
         public async Task<IEnumerable<TypeResultDto>> GetAllTypesAsync()
