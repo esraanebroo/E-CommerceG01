@@ -1,5 +1,6 @@
 ﻿using Domain.Contracts;
 using Domain.Entites;
+using Shared;
 
 namespace Servieces.Specifications
 {
@@ -11,25 +12,25 @@ namespace Servieces.Specifications
             AddInclude(product => product.ProductType);
         }
         //use to retrive all products [includ[brands, types]]
-        public ProductWithBrandAndTypeSpecifications(string? sort,int ?brandId,int?typeId) 
+        public ProductWithBrandAndTypeSpecifications(ProductParametersSpecifications specifications) 
             : base(product=>
-            (!brandId.HasValue|| product.BrandId==brandId.Value)&&
-            (!typeId.HasValue||product.TypeId==typeId.Value)
+            (!specifications.BrandId.HasValue|| product.BrandId== specifications.BrandId.Value)&&
+            (!specifications.TypeId.HasValue||product.TypeId== specifications.TypeId.Value)
             )
         {
             AddInclude(product=>product.productBrand);
             AddInclude(product=>product.ProductType);
-            if (!string.IsNullOrWhiteSpace(sort))
+            if (specifications.Sort is not null)
             {
-                switch (sort.ToLower().Trim())
+                switch (specifications.Sort)
                 {
-                    case "pricedes":
+                    case ProductSortOptions.PriceDesc:
                         SetOrderByDescending(p => p.Price);
                         break;
-                    case "Priceasc":
+                    case ProductSortOptions.PriceAsc:
                         SetOrderBy(p => p.Price);
                         break;
-                    case "namedec":
+                    case ProductSortOptions.NameDesc:
                         SetOrderByDescending(p => p.Name);
                         break;
                     default:
