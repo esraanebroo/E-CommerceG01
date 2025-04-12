@@ -19,6 +19,7 @@ namespace E_CommerceG01
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            #region Services
             //Presnetation Services
             builder.Services.AddPresentationServices();
             //Core Services
@@ -27,35 +28,37 @@ namespace E_CommerceG01
             builder.Services.AddInfrastructureServiveces(builder.Configuration);
 
             var app = builder.Build();
-
-            builder.Services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.InvalidModelStateResponseFactory = ApiResponseFactory.CustomValidtionErrorResponse;
-            });
-            
-
-           
-            app.UseMiddleware<GlobalErrorHandlingMiddleware>();
+            app.UseCustomMiddleware();
             await app.SeedDbAsync();
+            #endregion
 
+            #region pipeline.
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-                
+
             }
             app.UseStaticFiles();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
             app.Run();
 
-           
+            //builder.Services.Configure<ApiBehaviorOptions>(options =>
+            //{
+            //    options.InvalidModelStateResponseFactory = ApiResponseFactory.CustomValidtionErrorResponse;
+            //});
+
+
+
+            // app.UseMiddleware<GlobalErrorHandlingMiddleware>();
+
+            #endregion
         }
     }
 }
