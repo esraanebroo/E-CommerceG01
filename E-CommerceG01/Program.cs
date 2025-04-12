@@ -1,6 +1,8 @@
 
 using Domain.Contracts;
+using E_CommerceG01.Factories;
 using E_CommerceG01.Middlewares;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Presistance.Data;
 using Presistance.Data.DataSeed;
@@ -30,6 +32,10 @@ namespace E_CommerceG01
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddScoped<IDbIntailizer, DbIntializer>();
+            builder.Services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.InvalidModelStateResponseFactory = ApiResponseFactory.CustomValidtionErrorResponse;
+                });
             
 
             var app = builder.Build();
