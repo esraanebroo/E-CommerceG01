@@ -10,6 +10,7 @@ namespace Shared
     {
         public int? BrandId { get; set; }
         public int? TypeId { get; set; }
+        public string? Search { get; set; }
         public ProductSortOptions? Sort { get; set; }
         public int PageIndex { get; set; } = 1;
         private const int MaxPageSize = 10;
