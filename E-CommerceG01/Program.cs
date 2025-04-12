@@ -1,5 +1,6 @@
 
 using Domain.Contracts;
+using E_CommerceG01.Middlewares;
 using Microsoft.EntityFrameworkCore;
 using Presistance.Data;
 using Presistance.Data.DataSeed;
@@ -32,6 +33,7 @@ namespace E_CommerceG01
             
 
             var app = builder.Build();
+            app.UseMiddleware<GlobalErrorHandlingMiddleware>();
             await IntializeDbAsync(app);
 
             // Configure the HTTP request pipeline.
