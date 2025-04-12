@@ -1,5 +1,6 @@
 
 using Domain.Contracts;
+using E_CommerceG01.Extentions;
 using E_CommerceG01.Factories;
 using E_CommerceG01.Middlewares;
 using Microsoft.AspNetCore.Mvc;
@@ -18,29 +19,24 @@ namespace E_CommerceG01
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            //Presnetation Services
+            builder.Services.AddPresentationServices();
+            //Core Services
+            builder.Services.AddCoreServices();
+            //Infrastructure services
+            builder.Services.AddInfrastructureServiveces(builder.Configuration);
 
-            builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddAutoMapper(typeof(Servieces.AssemblyReference).Assembly);
-            builder.Services.AddScoped<IServiceManger, ServiceManger>();
-            builder.Services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
-            builder.Services.AddScoped<IDbIntailizer, DbIntializer>();
+            var app = builder.Build();
+
             builder.Services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.InvalidModelStateResponseFactory = ApiResponseFactory.CustomValidtionErrorResponse;
-                });
+            });
             
 
-            var app = builder.Build();
+           
             app.UseMiddleware<GlobalErrorHandlingMiddleware>();
-            await IntializeDbAsync(app);
+            await app.SeedDbAsync();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -59,12 +55,7 @@ namespace E_CommerceG01
 
             app.Run();
 
-           async Task IntializeDbAsync(WebApplication app) 
-            {
-                using var scope=app.Services.CreateScope();
-                var dbIntializer = scope.ServiceProvider.GetRequiredService<IDbIntailizer>();
-                await dbIntializer.IntializeAsync();
-            }
+           
         }
     }
 }
