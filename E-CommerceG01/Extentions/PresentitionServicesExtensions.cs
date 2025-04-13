@@ -7,7 +7,7 @@ namespace E_CommerceG01.Extentions
     {
         public static IServiceCollection AddPresentationServices(this IServiceCollection services) 
         {
-            services.AddControllers()/*.AddApplicationPart(typeof(Presentation.AssemblyReference).*/);
+            services.AddControllers()/*.AddApplicationPart(typeof(Presentation.AssemblyReference).)*/;
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
             services.Configure<ApiBehaviorOptions>(options =>
