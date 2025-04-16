@@ -1,15 +1,4 @@
-
-using Domain.Contracts;
 using E_CommerceG01.Extentions;
-using E_CommerceG01.Factories;
-using E_CommerceG01.Middlewares;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Presistance.Data;
-using Presistance.Data.DataSeed;
-using Presistance.Repositories;
-using Services.Abstraction;
-using Servieces;
 
 namespace E_CommerceG01
 {

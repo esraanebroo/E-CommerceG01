@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Exceptions
 {
-    public class NotFoundExceptions:Exception 
+    public  class NotFoundExceptions:Exception 
     {
         public NotFoundExceptions(string msg):base(msg)
         {

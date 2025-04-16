@@ -33,7 +33,7 @@ namespace E_CommerceG01.Extentions
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<IdentityAppDbContext>();
 
-            services.AddIdentity<User,IdentityRole>().AddEntityFrameworkStores<IdentityAppDbContext>();
+           // services.AddIdentity<User,IdentityRole>().AddEntityFrameworkStores<IdentityAppDbContext>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDbIntailizer, DbIntializer>();
             services.AddScoped<IBasketRepository, BasketRepository>();
