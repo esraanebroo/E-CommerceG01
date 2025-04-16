@@ -1,17 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction;
 using Shared.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Presentation
 {
-    [ApiController]
-    [Route("/api/[controller]")]
-    public class BasketController(IServiceManger _serviceManger):ControllerBase
+   
+    public class BasketController(IServiceManger _serviceManger):ApiController
     {
         [HttpGet("{id}")] //get :baseUrl/api/Basket/id
         public async Task<ActionResult<BasketDto>> Get(string id)

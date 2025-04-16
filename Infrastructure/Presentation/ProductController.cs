@@ -6,9 +6,8 @@ using System.Net;
 
 namespace Presentation
 {
-    [Controller]
-    [Route("api/[Controller]")]
-    public class ProductController(IServiceManger serviceManger):ControllerBase
+   
+    public class ProductController(IServiceManger serviceManger):ApiController
     {//Get All Product
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductResultDto>>> GetAllProduct([FromQuery]ProductParametersSpecifications specifications ) 
@@ -30,9 +29,7 @@ namespace Presentation
             var types = await serviceManger.ProductService.GetAllTypesAsync();
             return Ok(types);
         }
-        [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.InternalServerError)]
-        [ProducesResponseType(typeof(ValidtionErrorResponse),(int) HttpStatusCode.BadRequest)]
+      
         [ProducesResponseType(typeof(ProductResultDto), (int)HttpStatusCode.OK)]
 
         //Get product by id 
