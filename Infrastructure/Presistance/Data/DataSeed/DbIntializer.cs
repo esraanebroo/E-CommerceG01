@@ -1,4 +1,5 @@
 ﻿using Domain.Contracts;
+using Microsoft.AspNetCore.Identity;
 using System.Text.Json;
 
 namespace Presistance.Data.DataSeed
@@ -6,10 +7,14 @@ namespace Presistance.Data.DataSeed
     public class DbIntializer : IDbIntailizer
     {
         private readonly AppDbContext _dbContext;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<User> _userManager;
 
-        public DbIntializer(AppDbContext dbContext)
+        public DbIntializer(AppDbContext dbContext, RoleManager<IdentityRole> roleManager , UserManager<User> userManager )
         {
             _dbContext = dbContext;
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
         public async Task IntializeAsync()
         {
@@ -60,6 +65,37 @@ namespace Presistance.Data.DataSeed
             }
             catch { }
 
+        }
+
+        public async Task IntializeIdentityAsync()
+        {
+            if (!_roleManager.Roles.Any())
+            {
+                await _roleManager.CreateAsync(new IdentityRole("Admin"));
+                await _roleManager.CreateAsync(new IdentityRole("SuperAdmin"));
+            }
+            if(!_userManager.Users.Any())
+            {
+                var adminUser = new User()
+                {
+                    DisplayName = "Admin",
+                    UserName = "Admin",
+                    Email = "Admin@gmail.com",
+                    PhoneNumber = "01013145678"
+                };
+                var superAdminUser = new User()
+                {
+                    DisplayName = "SuperAdmin",
+                    UserName = "SuperAdmin",
+                    Email = "superAdmin@gmail.com",
+                    PhoneNumber = "01013145678"
+                };
+                await _userManager.CreateAsync(adminUser,"P@ssw0rd");
+                await _userManager.CreateAsync(superAdminUser,"Passw0rd@");
+                await _userManager.AddToRoleAsync(adminUser, "Admin");
+                await _userManager.AddToRoleAsync(superAdminUser, "SuperAdmin");
+
+            }
         }
     }
 }

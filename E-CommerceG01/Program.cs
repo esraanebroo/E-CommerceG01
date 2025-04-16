@@ -1,15 +1,4 @@
-
-using Domain.Contracts;
 using E_CommerceG01.Extentions;
-using E_CommerceG01.Factories;
-using E_CommerceG01.Middlewares;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Presistance.Data;
-using Presistance.Data.DataSeed;
-using Presistance.Repositories;
-using Services.Abstraction;
-using Servieces;
 
 namespace E_CommerceG01
 {
@@ -23,7 +12,7 @@ namespace E_CommerceG01
             //Presnetation Services
             builder.Services.AddPresentationServices();
             //Core Services
-            builder.Services.AddCoreServices();
+            builder.Services.AddCoreServices(builder.Configuration);
             //Infrastructure services
             builder.Services.AddInfrastructureServiveces(builder.Configuration);
 
@@ -42,7 +31,8 @@ namespace E_CommerceG01
             }
             app.UseStaticFiles();
             app.UseHttpsRedirection();
-
+            // piplines Securty 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllers();

@@ -1,19 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction;
 using Shared;
 using Shared.ErrorModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Presentation
 {
-    [Controller]
-    [Route("api/[Controller]")]
-    public class ProductController(IServiceManger serviceManger):ControllerBase
+    [Authorize]
+    public class ProductController(IServiceManger serviceManger):ApiController
     {//Get All Product
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductResultDto>>> GetAllProduct([FromQuery]ProductParametersSpecifications specifications ) 
@@ -35,9 +30,7 @@ namespace Presentation
             var types = await serviceManger.ProductService.GetAllTypesAsync();
             return Ok(types);
         }
-        [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.NotFound)]
-        [ProducesResponseType(typeof(ErrorDetails), (int)HttpStatusCode.InternalServerError)]
-        [ProducesResponseType(typeof(ValidtionErrorResponse),(int) HttpStatusCode.BadRequest)]
+      
         [ProducesResponseType(typeof(ProductResultDto), (int)HttpStatusCode.OK)]
 
         //Get product by id 
