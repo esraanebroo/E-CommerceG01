@@ -24,9 +24,24 @@ namespace Servieces
 
         }
 
-        public Task<UserResultDto> Register(RegisterDto registerDto)
+        public async Task<UserResultDto> Register(RegisterDto registerDto)
         {
-            throw new NotImplementedException();
+            var user = new User
+            {
+                DisplayName = registerDto.DisplayName,
+                Email = registerDto.Email,
+                UserName = registerDto.DisplayName,
+                PhoneNumber = registerDto.PhoneNumber,
+               
+            };
+             var result= await  _userManager.CreateAsync(user, registerDto.Password);
+            if (!result.Succeeded)
+            { var error = result.Errors.Select(e => e.Description).ToList(); 
+               throw new ValidtionException(error);
+            }
+                return new UserResultDto(user.DisplayName,"Token",user.Email);
+           
+        
         }
     }
 }
