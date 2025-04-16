@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction;
 using Shared;
 using Shared.ErrorModels;
@@ -6,7 +7,7 @@ using System.Net;
 
 namespace Presentation
 {
-   
+    [Authorize]
     public class ProductController(IServiceManger serviceManger):ApiController
     {//Get All Product
         [HttpGet]

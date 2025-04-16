@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Services.Abstraction;
 using Shared.Dtos;
 
 namespace Presentation
 {
-   
+    [Authorize]
     public class BasketController(IServiceManger _serviceManger):ApiController
     {
         [HttpGet("{id}")] //get :baseUrl/api/Basket/id
