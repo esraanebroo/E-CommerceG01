@@ -1,0 +1,17 @@
+﻿using Shared.OrderModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Services.Abstraction
+{
+    public interface IOrderService
+    {
+        Task<OrderResult> GetOrderByIdAsync(Guid id);
+        Task<IEnumerable<OrderResult>> GetAllOrderByEmailAsync(string userEmail);
+        Task<OrderResult> CreateOrderAsync(OrderRequest request, string userEmail);
+        Task<IEnumerable<DeliveryMethodResult>> GetDeliveryMethodsAsync();
+    }
+}
