@@ -17,7 +17,7 @@ namespace Shared.OrderModels
         public string PaymentStatus { get; init; } 
         public string DeliveryMethod { get; init; }
         public int? DeliveryMethodId { get; init; }
-        public decimal SubTotal { get; init; }  // OrderItem.Price * OrderItem.Quantity // Total = SubTotal + Shipping Price 
+        public decimal Total { get; init; }  // OrderItem.Price * OrderItem.Quantity // Total = SubTotal + Shipping Price 
         public DateTimeOffset OrderDate { get; init; } = DateTimeOffset.Now;
         public string PaymentIntentId { get; init; } = string.Empty;
     }
