@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 namespace Domain.Entites.OrderEntites
 {
     public enum OrderPaymentStatus
-    { pending=0,
+    {  
+        pending=0,
         PaymentRecived=1,
         PaymentFailed=2
-       
+
     }
 }
