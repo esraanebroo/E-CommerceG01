@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Exceptions
+namespace Domain.Exceptions.NotFoundExceptions
 {
-    public  class NotFoundExceptions:Exception 
+    public class NotFoundExceptions : Exception
     {
-        public NotFoundExceptions(string msg):base(msg)
+        public NotFoundExceptions(string msg) : base(msg)
         {
-            
+
         }
 
     }
