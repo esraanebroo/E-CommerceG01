@@ -1,4 +1,5 @@
 ﻿using Domain.Exceptions;
+using Domain.Exceptions.NotFoundExceptions;
 using Microsoft.AspNetCore.Http;
 using Shared.ErrorModels;
 using System.Net;

@@ -7,7 +7,7 @@
             
         }
         public Order(string userEmail,
-            ShippingAdress shippingAdress,
+            Address shippingAdress,
             ICollection<OrderItem> orderItems, 
             DeliveryMethod deliveryMethod,
             decimal subTotal
@@ -23,7 +23,7 @@
 
         public string UserEmail { get; set; }
 
-        public ShippingAdress ShippingAdress { get; set; }
+        public Address ShippingAdress { get; set; }
 
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
         public OrderPaymentStatus PaymentStatus { get; set; }= OrderPaymentStatus.pending;

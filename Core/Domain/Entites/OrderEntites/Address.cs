@@ -1,12 +1,12 @@
 ﻿namespace Domain.Entites.OrderEntites
 {
-    public class ShippingAdress
+    public class Address
     {
-        public ShippingAdress()
+        public Address()
         {
             
         }
-        public ShippingAdress(string firstName, string lastName, string country, string city, string street) 
+        public Address(string firstName, string lastName, string country, string city, string street) 
         { 
             FirstName = firstName;
             LastName = lastName;

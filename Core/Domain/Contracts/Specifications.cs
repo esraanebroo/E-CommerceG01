@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace Domain.Contracts
 {
     public abstract class Specifications <T> where T : class
     {
         //Where/Expretion
-        public Expression<Func<T, bool>> ? Criteria { get; } //where
+        public Expression<Func<T,bool>> ? Criteria { get;} //where
         public List<Expression<Func<T, object>>> IncludeExpressions { get; } = new();//Navegtional prop
         //sort
         public Expression<Func<T,object>> OrderBy { get; private set; } 
@@ -40,17 +35,6 @@ namespace Domain.Contracts
             Take=PageSize;
             Skip=(pageIndex-1)*PageSize;
         }
-
-
-
-
-
-
-
-
-
-
-
 
     }
 }
