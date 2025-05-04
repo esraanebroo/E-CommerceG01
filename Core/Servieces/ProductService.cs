@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Contracts;
 using Domain.Entites;
-using Domain.Exceptions;
+using Domain.Exceptions.NotFoundExceptions;
 using Services.Abstraction;
 using Servieces.Specifications;
 using Shared;
