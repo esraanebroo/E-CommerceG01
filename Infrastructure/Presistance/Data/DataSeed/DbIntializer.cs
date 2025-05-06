@@ -20,8 +20,8 @@ namespace Presistance.Data.DataSeed
         {
             try 
             {
-                //if (_dbContext.Database.GetPendingMigrations().Any())
-                //{
+                if (_dbContext.Database.GetPendingMigrations().Any())
+                {
                     await _dbContext.Database.MigrateAsync();
                     if (!_dbContext.ProductTypes.Any())
                     {
@@ -74,7 +74,7 @@ namespace Presistance.Data.DataSeed
                             await _dbContext.SaveChangesAsync();
                         }
                     }
-               // }
+                }
 
 
             }
