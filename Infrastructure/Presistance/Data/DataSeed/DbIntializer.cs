@@ -1,4 +1,4 @@
-﻿using Domain.Contracts;
+﻿using Domain.Entites.OrderEntites;
 using Microsoft.AspNetCore.Identity;
 using System.Text.Json;
 
@@ -37,9 +37,11 @@ namespace Presistance.Data.DataSeed
 
                     if (!_dbContext.ProductBrands.Any())
                     {
-                        //C:\Users\user\source\repos\E-CommerceG01\Infrastructure\Presistance\Data\DataSeed\brands.json
-                        var brandData = await File.ReadAllTextAsync(@"..\Infrastructure\Presistance\Data\DataSeed\brands.json");
-                        var brand = JsonSerializer.Deserialize<List<ProductType>>(brandData);
+                    //C:\Users\user\source\repos\E-CommerceG01\Infrastructure\Presistance\Data\DataSeed\brands.json
+                    var brandData = await File.ReadAllTextAsync(@"..\Infrastructure\Presistance\Data\DataSeed\brands.json");
+                   // var brandData = Path.Combine(Environment.CurrentDirectory, "Data", "DataSeed", "brands.json");
+
+                    var brand = JsonSerializer.Deserialize<List<ProductBrand>>(brandData);
                         if (brand is not null && brand.Any())
                         {
                             await _dbContext.AddRangeAsync(brand);
@@ -48,17 +50,30 @@ namespace Presistance.Data.DataSeed
                     }
                     if (!_dbContext.Products.Any())
                     {
-                        //C:\Users\user\source\repos\E-CommerceG01\Infrastructure\Presistance\Data\DataSeed\product.json
-                        var productsData = await File.ReadAllTextAsync(@"..\Infrastructure\Presistance\Data\DataSeed\products.json");
-                        var product = JsonSerializer.Deserialize<List<ProductType>>(productsData);
+                    //C:\Users\user\source\repos\E-CommerceG01\Infrastructure\Presistance\Data\DataSeed\product.json
+                     var productsData = await File.ReadAllTextAsync(@"..\Infrastructure\Presistance\Data\DataSeed\products.json");
+                   // var productsData = Path.Combine(Environment.CurrentDirectory, "Data", "DataSeed", "products.json");
+
+                    var product = JsonSerializer.Deserialize<List<Product>>(productsData);
                         if (product is not null && product.Any())
                         {
                             await _dbContext.AddRangeAsync(product);
                             await _dbContext.SaveChangesAsync();
                         }
                     }
+                    if (!_dbContext.DeliveryMethods.Any())
+                    {
+                    //C:\Users\user\source\repos\E-CommerceG01\Infrastructure\Presistance\Data\DataSeed\product.json
+                     var deliverymethods = await File.ReadAllTextAsync(@"..\Infrastructure\Presistance\Data\DataSeed\delivery.json");
+                     // var deliverymethods = Path.Combine(Environment.CurrentDirectory, "Data", "DataSeed", "delivery.json");
 
-
+                      var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliverymethods);
+                        if (methods is not null && methods.Any())
+                        {
+                            await _dbContext.AddRangeAsync(methods);
+                            await _dbContext.SaveChangesAsync();
+                        }
+                    }
                 }
 
 

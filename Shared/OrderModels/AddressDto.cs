@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Shared.OrderModels
+﻿namespace Shared.OrderModels
 {
-    public class ShippingAdressDto
+    public class AddressDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

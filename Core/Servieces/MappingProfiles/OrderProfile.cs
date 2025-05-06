@@ -8,7 +8,7 @@ namespace Servieces.MappingProfiles
     {
         public OrderProfile()
         {
-            CreateMap<Address, ShippingAdressDto>();
+            CreateMap<Address, AddressDto>();
             CreateMap<DeliveryMethod, DeliveryMethodResult>();
             CreateMap<OrderItem, OrderItemDto>().
                 ForMember(d => d.ProductName, option => option.MapFrom(s => s.Product.ProductName))
